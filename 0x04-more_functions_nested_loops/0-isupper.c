@@ -1,5 +1,9 @@
+/*
+ * File: 0-isupper.c
+ * Auth: Brennan D Baraban
+ */
 
-#include "main.h"
+#include "holberton.h"
 
 /**
  * _isupper - Checks for uppercase characters.
@@ -14,4 +18,4 @@ int _isupper(int c)
 
 	else
 		return (0);
-
+}

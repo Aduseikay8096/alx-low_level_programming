@@ -1,27 +1,29 @@
+#include "main.h"
 /**
- * rot13 - encodes a string in rot13
- *
- * @a: string to encode
- *
- * Return: encoded string
+ * rot13 - rot13 encoding
+ * Return: pointer to arr
+ * @s: string
  */
-char *rot13(char *a)
+char *rot13(char *s)
 {
-	char *sptr = a;
-	int index;
-	char trans[2][54] = {"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
-				   "nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM"};
+	char half1[] = "aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ";
 
-	while (*sptr != 0)
+	char half2[] = "nNoOpPqQrRsStTuUvVwWxXyYzZaAbBcCdDeEfFgGhHiIjJkKlLmM";
+
+	int i = 0, j;
+
+	while (s[i] != 0)
 	{
-		if ((*sptr >= 'a' && *sptr <= 'z') || (*sptr >= 'A' && *sptr <= 'Z'))
+		char c = s[i];
+
+		for (j = 0; j < 52; j++)
 		{
-			index = 0;
-			while (*sptr != trans[0][index])
-				index++;
-			*sptr = trans[1][index];
+			if (c == half1[j])
+			{
+				s[i] = half2[j];
+			}
 		}
-		sptr++;
+		i++;
 	}
-	return (a);
+	return (s);
 }

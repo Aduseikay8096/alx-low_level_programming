@@ -1,57 +1,47 @@
-#include "lists.h"
-#include <stdlib.h>
-#include <stdio.h>
+#include "holberton.h"
 
 /**
- * find_listint_loop_pl - finds a loop in a linked list
- *
- * @head: linked list to search
- *
- * Return: address of node where loop starts/returns, NULL if no loop
+ * print_number - Function that prints an integer.
+ * @n: int type number
+ * Description: Can only use _putchar to print.
  */
-listint_t *find_listint_loop_pl(listint_t *head)
+void print_number(int n)
 {
-	listint_t *ptr, *end;
+	long m; /* power of 10 */
+	int c; /* boolean check */
+	long num; /* convert int to long */
 
-	if (head == NULL)
-		return (NULL);
-
-	for (end = head->next; end != NULL; end = end->next)
+	num = n;
+	/* negatives */
+	if (num < 0)
 	{
-		if (end == end->next)
-			return (end);
-		for (ptr = head; ptr != end; ptr = ptr->next)
-			if (ptr == end->next)
-				return (end->next);
-	}
-	return (NULL);
-}
-
-/**
- * print_listint_safe - prints a linked list, even if it
- * has a loop
- *
- * @head: head of list to print
- *
- * Return: number of nodes printed
- */
-size_t print_listint_safe(const listint_t *head)
-{
-	size_t len = 0;
-	int loop;
-	listint_t *loopnode;
-
-	loopnode = find_listint_loop_pl((listint_t *) head);
-
-	for (len = 0, loop = 1; (head != loopnode || loop) && head != NULL; len++)
-	{
-		printf("[%p] %d\n", (void *) head, head->n);
-		if (head == loopnode)
-			loop = 0;
-		head = head->next;
+		num *= -1;
+		_putchar('-');
 	}
 
-	if (loopnode != NULL)
-		printf("-> [%p] %d\n", (void *) head, head->n);
-	return (len);
+	/* count up */
+	m = 1;
+	c = 1;
+	while (c)
+	{
+		if (num / (m * 10) > 0)
+			m *= 10;
+		else
+			c = 0;
+	}
+
+	/* count down */
+	while (num >= 0)
+	{
+		if (m == 1)
+		{
+			_putchar(num % 10 + '0');
+			num = -1;
+		}
+		else
+		{
+			_putchar((num / m % 10) + '0');
+			m /= 10;
+		}
+	}
 }

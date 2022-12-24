@@ -1,31 +1,27 @@
 #include "main.h"
+
+#define ROT13IN  "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+#define ROT13OUT "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm"
+
 /**
- * rot13 - encodes a string using rot13
- * @str: the string to encode
+ * rot13 - encodes a string in rot13
+ * @s: the string to encode
  *
- * Return: encode string
+ * Return: char pointer
  */
-char *rot13(char *str)
+char *rot13(char *s)
 {
-	int i, j;
+	char *ret = s, *rot13in = ROT13IN, *rot13out = ROT13OUT;
+	int i = 0;
 
-	char alpha[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-	char rot[] = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm";
-
-	i = 0;
-	while (str[i] != '\0')
+	for (; *s; s++)
 	{
-		j = 0;
-		while (alpha[j] != '\0')
-		{
-			if (str[i] == alpha[j])
+		for (i = 0; rot13in[i]; i++)
+			if (*s == rot13in[i])
 			{
-				str[i] = rot[j];
+				*s = rot13out[i];
 				break;
 			}
-			j++;
-		}
-		i++;
 	}
-	return (str);
+	return (ret);
 }

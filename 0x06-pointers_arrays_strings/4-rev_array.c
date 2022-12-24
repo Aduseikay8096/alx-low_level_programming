@@ -1,26 +1,24 @@
-/*
- * File: 3-strcmp.c
- * Auth: Brennan D Baraban
- */
-
 #include "main.h"
-
 /**
- * _strcmp - Compares pointers to two strings.
- * @s1: A pointer to the first string to be compared.
- * @s2: A pointer to the second string to be compared.
+ * reverse_array - reverses an array
+ * @a: an array of integers
+ * @n: number of elements of an array
  *
- * Return: If str1 < str2, the negative difference of the first unmatched characters.
- *         If str1 == str2, 0.
- *         If str1 > str2, the positive difference of the first unmatched characters.
  */
-int _strcmp(char *s1, char *s2)
+void reverse_array(int *a, int n)
 {
-	while (*s1 && *s2 && *s1 == *s2)
-	{
-		s1++;
-		s2++;
-	}
+	int i;
+	int temp;
 
-	return (*s1 - *s2);
+	i = 0;
+	n = n - 1;
+
+	while (i < n)
+	{
+		temp = a[i];
+		a[i] = a[n];
+		a[n] = temp;
+		i++;
+		n--;
+	}
 }

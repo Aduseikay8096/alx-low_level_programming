@@ -1,6 +1,5 @@
 /**
  * _strspn - finds length of prefix substring
- *
  * @s: string to check
  * @accept: substring of chars
  *

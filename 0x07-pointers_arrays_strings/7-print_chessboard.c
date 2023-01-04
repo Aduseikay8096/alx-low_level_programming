@@ -1,7 +1,6 @@
 #include "main.h"
 /**
  * print_chessboard - prints out a chessboard
- *
  * @a: chessboard to print, 2D array [8] columns
  *
  * Return: always void

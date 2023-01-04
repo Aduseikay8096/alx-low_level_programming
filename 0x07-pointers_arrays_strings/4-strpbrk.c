@@ -1,6 +1,5 @@
 /**
  * _strpbrk - searches string for set of bytes
- *
  * @s: string to check
  * @accept: substring of chars
  *

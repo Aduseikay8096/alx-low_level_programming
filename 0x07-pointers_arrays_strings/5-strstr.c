@@ -1,6 +1,5 @@
 /**
  * _strstr - locates a substring
- *
  * @haystack: string to search
  * @needle: substring to find
  *

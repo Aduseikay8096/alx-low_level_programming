@@ -1,22 +1,29 @@
+#include "main.h"
+
 /**
- * wildcmp - Compare two strings allowing for wildcard char
- * @s1: String being compared
- * @s2: String being compared against
+ * sqrt2 - Makes possible to evaluate from 1 to n
+ * @a: same number as n
+ * @b: number that iterates from 1 to n
  *
- * Return: 1 if considered identical, 0 otherwise
+ * Return: On success 1.
+ * On error, -1 is returned, and errno is set appropriately.
  */
-int wildcmp(char *s1, char *s2)
+int sqrt2(int a, int b)
 {
-	if (*s1 == '\0' && *s2 == '\0')
-		return (1);
-	if (*s1 == *s2)
-		return (wildcmp(s1 + 1, s2 + 1));
-	if (*s2 == '*')
-	{
-		if (*(s2 + 1) == '*')
-			return (wildcmp(s1, s2 + 1));
-		if (wildcmp(s1 + 1, s2) || wildcmp(s1, s2 + 1))
-			return (1);
-	}
-	return (0);
+	if (b * b == a)
+		return (b);
+	else if (b * b > a)
+		return (-1);
+	return (sqrt2(a, b + 1));
+}
+/**
+ * _sqrt_recursion - returns the natural square root of n
+ * @n: Number Integer
+ *
+ * Return: On success 1.
+ * On error, -1 is returned, and errno is set appropriately.
+ */
+int _sqrt_recursion(int n)
+{
+	return (sqrt2(n, 1));
 }

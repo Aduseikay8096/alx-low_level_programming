@@ -1,5 +1,6 @@
 #include <stdlib.h>
 
+
 /**
  * create_array - creates an array of size size
  *

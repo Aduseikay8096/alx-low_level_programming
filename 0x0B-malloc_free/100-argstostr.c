@@ -1,86 +1,41 @@
-#include "main.h"
-
-char *_strcat(char *dest, char *src);
+#include <stdlib.h>
 
 /**
- * argstostr - concatenates all the arguments
- * @av: the content
- * @ac: the size of the content
+ * argstostr - converts array of strings to one string with newline separators
  *
- * Return: a pointer to a new string
+ * @ac: number of strings
+ * @av: array of strings
+ *
+ * Return: char * to concatenated string
  */
 char *argstostr(int ac, char **av)
 {
-	char *new, *salt;
-	int i, j, k;
+	int size = 0, i;
+	char *ptr, *ret, *retptr;
 
-	if (ac == 0 || av == NULL)
-	{
+	if (ac == 0 || !av)
 		return (NULL);
-	}
-	else
-	{
-		for (i = 0, k = 0 ; i < ac ; i++, k++)
-		{
-			for (j = 0 ; av[i][j] != '\0' ; j++, k++)
-			{
-				;
-			}
-		}
-		new = malloc(sizeof(char) * (k + 1));
-		salt = "\n";
-		for (i = 0 ; i < ac ; i++)
-		{
-			new = _strcat(new, av[i]);
-			if (new == NULL)
-			{
-				return (NULL);
-			}
-			if (i + 1 < ac)
-			{
-				new = _strcat(new, salt);
-				if (new == NULL)
-				{
-					return (NULL);
-				}
-			}
-		}
 
-	}
-	new = _strcat(new, salt);
-	if (new == NULL)
+	for (i = 0; i < ac; i++)
 	{
+		ptr = av[i];
+		while (*ptr++)
+			size++;
+	}
+
+	ret = malloc(size + 1 + ac);
+	if (!ret)
 		return (NULL);
-	}
-	return (new);
-}
 
-/**
- * _strcat - concatenates two strings
- * @dest: input parameter string
- * @src: input parameter string
- *
- * Return: dest
- */
-char *_strcat(char *dest, char *src)
-{
-	int a;
-	int b;
-
-	a = 0;
-
-	while (dest[a] != 0)
+	retptr = ret;
+	for (i = 0; i < ac; i++)
 	{
-		a++;
+		for (ptr = av[i]; *ptr; ptr++, retptr++)
+		{
+			*retptr = *ptr;
+		}
+		*retptr++ = '\n';
 	}
 
-	b = 0;
-
-	while (src[b] != 0)
-	{
-		dest[a] = src[b];
-		a++;
-		b++;
-	}
-	return (dest);
+	return (ret);
 }

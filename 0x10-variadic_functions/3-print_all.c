@@ -2,6 +2,7 @@
 #include <stdarg.h>
 #include "variadic_functions.h"
 
+
 /**
  * print_all - function with 2 parameter
  * @format: char type pointer to string

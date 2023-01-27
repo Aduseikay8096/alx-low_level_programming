@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include "lists.h"
 
+
 /**
  * free_list - function with one argument
  * @head: pointer to list_t

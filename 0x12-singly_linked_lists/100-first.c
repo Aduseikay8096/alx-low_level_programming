@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "lists.h"
 
+
 void test(void) __attribute__((constructor));
 /**
  * test - function with constructor

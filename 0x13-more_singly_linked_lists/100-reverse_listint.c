@@ -1,53 +1,36 @@
-#include <stdlib.h>
 #include "lists.h"
+
 /**
- * delete_nodeint_at_index - delete node at index
- * @head: head node
- * @index: index node
- * Return: 1 succed -1 fails
+ * reverse_listint - function with one argument
+ * @head: pointer to head pointer of linked list
+ *
+ * Description: reverses a linked list
+ * Return: pointer to the first node of the reversed list
  */
-int delete_nodeint_at_index(listint_t **head, unsigned int index)
+listint_t *reverse_listint(listint_t **head)
 {
-	listint_t *prev, *node;
+	listint_t *prev, *linker;
 
-	if (!*head)
-		return (-1);
+	if (head == NULL || *head == NULL)
+		return (NULL);
 
-	prev = get_nodeint_at_index(*head, index - 1);
-	node = get_nodeint_at_index(*head, index);
-	if (!node)
-		return (-1);
-	if (index != 0)
+	if ((*head)->next == NULL)
+		return (*head);
+	prev = *head;
+	linker = prev->next;
+	*head = linker->next;
+
+	prev->next = NULL;
+
+	while ((*head)->next != NULL)
 	{
-		prev->next = node->next;
-		node->next = 0;
+		linker->next = prev;
+		prev = linker;
+		linker = (*head);
+		*head = (*head)->next;
 	}
-	else
-	{
-		*head = node->next;
-	}
-	free(node);
-	return (1);
-}
-/**
- * get_nodeint_at_index - get node at index
- * @head: head node
- * @index: index node
- * Return: address of index node
- */
-listint_t *get_nodeint_at_index(listint_t *head, unsigned int index)
-{
-	unsigned int i = 0;
 
-	if (!head)
-		return (0);
-
-	while (head)
-	{
-		if (index == i)
-			return (head);
-		i++;
-		head = head->next;
-	}
-	return (0);
+	(*head)->next = linker;
+	linker->next = prev;
+	return (*head);
 }

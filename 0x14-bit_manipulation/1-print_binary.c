@@ -1,5 +1,6 @@
 #include "main.h"
 
+
 /**
  * print_binary - function with one argument
  * @n: decimal value

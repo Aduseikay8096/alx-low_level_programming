@@ -1,53 +1,46 @@
-#include <stdlib.h>
 #include "lists.h"
+#include <stdio.h>
 /**
- * delete_nodeint_at_index - delete node at index
- * @head: head node
- * @index: index node
- * Return: 1 succed -1 fails
+ * delete_nodeint_at_index - function with two arguments
+ * @head: pointer to head pointer of first node in a linked list
+ * @index: element index in a linked list
+ *
+ * Description: deletes the node at index of a linked list
+ * Return: 1 if succeeded or -1 if fail
  */
 int delete_nodeint_at_index(listint_t **head, unsigned int index)
 {
-	listint_t *prev, *node;
+	listint_t *cursor, *c_next;
+	unsigned int count = 0;
 
-	if (!*head)
+	cursor = *head;
+
+	if (head == NULL || *head == NULL)
 		return (-1);
 
-	prev = get_nodeint_at_index(*head, index - 1);
-	node = get_nodeint_at_index(*head, index);
-	if (!node)
-		return (-1);
-	if (index != 0)
+	if (index == 0)
 	{
-		prev->next = node->next;
-		node->next = 0;
+		*head = cursor->next;
+		free(cursor);
+		return (1);
 	}
-	else
+	if (index == 1)
 	{
-		*head = node->next;
+		cursor = (*head)->next;
+		(*head)->next = cursor->next;
+		free(cursor);
+		return (1);
 	}
-	free(node);
+	while (count < index - 1)
+	{
+		if (cursor->next == NULL)
+			return (-1);
+		count++;
+		cursor = cursor->next;
+		c_next = cursor->next;
+	}
+	cursor->next = c_next->next;
+	free(c_next);
+
 	return (1);
-}
-/**
- * get_nodeint_at_index - get node at index
- * @head: head node
- * @index: index node
- * Return: address of index node
- */
-listint_t *get_nodeint_at_index(listint_t *head, unsigned int index)
-{
-	unsigned int i = 0;
-
-	if (!head)
-		return (0);
-
-	while (head)
-	{
-		if (index == i)
-			return (head);
-		i++;
-		head = head->next;
-	}
-	return (0);
 }

@@ -5,17 +5,16 @@
  * Return: 0 if big endian, or 1 if little endian
  */
 
+/**
+ * get_endianness - Gets the endianness of a machine
+ *
+ * Return: 1 if little endian, 0 if big endian
+ */
 int get_endianness(void)
 {
-	unsigned int i = 1;
-	char *m = (char *)&i;
+	int x;
+	char *y;
 
-	if (*m)
-	{
-		return (1);
-	}
-	else
-	{
-		return (0);
-	}
+	y = (char *)&x;
+	return (*y + 48);
 }
